@@ -81,7 +81,7 @@ def chat():
         return jsonify({'response': 'المرجو إدخال سؤال.'})
     
     try:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_API_KEY}"
         
         prompt_text = f"أنت مساعد فقهي ميسر. أجب باختصار ووضوح مستنداً إلى الأدلة إن أمكن. السؤال هو: {user_message}"
         
