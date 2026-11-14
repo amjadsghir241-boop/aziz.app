@@ -7,13 +7,12 @@ app = Flask(__name__)
 # مفتاح الـ API الخاص بك
 GEMINI_API_KEY = "AQ.Ab8RN6L909wUsCy1UThfQ0jWjzmW_8j4xMReoEXIFmlm2izuAA"
 
-# واجهة HTML مدمجة مباشرة لكي لا تحتاج لإنشاء مجلد templates خارجي
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>مساعد فقهي ميسر</title>
+    <title>المساعد الفقهي الميسر</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9fb; color: #333; }
         .chat-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -50,7 +49,7 @@ HTML_TEMPLATE = """
                 const response = await fetch('/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.parse(JSON.stringify({ message: message }))
+                    body: JSON.stringify({ message: message })
                 });
                 const data = await response.json();
                 chatBox.innerHTML += `<div class="message bot-msg"><b>المساعد:</b> ${data.response}</div>`;
@@ -76,12 +75,12 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user_message = request.json.get('message', '')
+    data = request.get_json()
+    user_message = data.get('message', '') if data else ''
     if not user_message:
         return jsonify({'response': 'المرجو إدخال سؤال.'})
     
     try:
-        # استخدام نموذج gemini-1.5-flash المتوفر والمعتمد
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
         
         prompt_text = f"أنت مساعد فقهي ميسر. أجب باختصار ووضوح مستنداً إلى الأدلة إن أمكن. السؤال هو: {user_message}"
