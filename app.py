@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 # مفتاح الـ API الخاص بك
-GEMINI_API_KEY = "AQ.Ab8RN6KxqaoMoEugRd27MBCOEBxg7oH3wobPHoORyRDTmJFa1Q"
+GEMINI_API_KEY = "AQ.Ab8RN6KOUag3XtrxNaTlWDYYMSyvNREopu4ZgMkO7iYX7M32Ow"
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
